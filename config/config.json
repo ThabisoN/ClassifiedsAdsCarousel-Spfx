@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "classified-ads-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/classifiedAds/ClassifiedAdsWebPart.js",
+          "manifest": "./src/webparts/classifiedAds/ClassifiedAdsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ClassifiedAdsWebPartStrings": "lib/webparts/classifiedAds/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.19.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.9.1"
+    },
+    "version": "1.17.2",
+    "libraryName": "classified-ads-carousel",
+    "libraryId": "06fef0e1-559f-4673-8e97-90db580edf8a",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "classified-ads-carousel",
+    "solutionShortDescription": "classified-ads-carousel description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
