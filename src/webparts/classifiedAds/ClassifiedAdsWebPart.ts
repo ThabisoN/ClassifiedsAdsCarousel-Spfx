@@ -1,3 +1,5 @@
+/* eslint-disable @microsoft/spfx/pair-react-dom-render-unmount */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
@@ -10,7 +12,6 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import ClassifiedAds from './components/ClassifiedAds';
 import { IClassifiedAdsProps } from './components/IClassifiedAdsProps';
-
 export interface IClassifiedAdsWebPartProps {
   description: string;
   listName: string;
