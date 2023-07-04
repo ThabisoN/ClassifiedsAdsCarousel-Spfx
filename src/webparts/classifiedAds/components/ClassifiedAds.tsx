@@ -3,13 +3,12 @@
 import * as React from 'react';
 import styles from './ClassifiedAds.module.scss';
 import { IClassifiedAdsProps } from './IClassifiedAdsProps';
-import Carousel from 'react-bootstrap/Carousel';
 import "bootstrap/dist/css/bootstrap";
 import { IFile, IResponseItem } from "../../../interface";
 import { getSP } from '../../services/pnpjsConfig';
 import { SPFI } from '@pnp/sp';
 import { Logger, LogLevel } from "@pnp/logging";
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Row } from 'react-bootstrap';
 
 export interface IClassifiedAdsListItem {
   title: string;
@@ -82,25 +81,23 @@ export default class ClassifiedsAdsCard extends React.Component<IClassifiedAdsPr
     let collection = this.state.items;
     console.log('Collection ', collection);
     return (
+      <Row lg={3}>
       <div className={styles.classifiedAds}>
         <Card style={{ width: '18rem' }}>
-          <Carousel>
             {collection.length > 0 && collection.map((data: any) => {
               return (
                 // eslint-disable-next-line react/jsx-key
-                <Carousel.Item>
                   <Card.Body>
                     <Card.Title>{data.Title}</Card.Title>
                     <Card.Img variant='top' src={'../../ClassifiedsAds/' + data.Name} />
                     <Card.Text> {data.Descriptions}</Card.Text>
                     <Button variant='primary' onClick={() => { this.getLibrary() }}>Add Your Ads</Button>
                   </Card.Body>
-                </Carousel.Item>
               );
             })}
-          </Carousel>
         </Card>
       </div>
+    </Row>
     );
   }
 }
