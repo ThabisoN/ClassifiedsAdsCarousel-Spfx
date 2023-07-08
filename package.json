@@ -21,6 +21,8 @@
     "@microsoft/sp-webpart-base": "1.17.2",
     "@pnp/logging": "^3.15.0",
     "@pnp/sp": "^3.15.0",
+    "@pnp/spfx-controls-react": "3.14.0",
+    "@pnp/spfx-property-controls": "^3.13.0",
     "@types/bootstrap": "^4.6.2",
     "@types/jquery": "^3.5.16",
     "bootstrap": "^4.6.2",

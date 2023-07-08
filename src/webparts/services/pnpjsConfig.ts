@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-var */
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 
 // import pnp and pnp logging system

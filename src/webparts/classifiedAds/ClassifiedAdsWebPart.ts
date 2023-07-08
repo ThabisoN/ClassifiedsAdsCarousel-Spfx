@@ -30,6 +30,7 @@ export default class ClassifiedAdsWebPart extends BaseClientSideWebPart<IClassif
         listName: this.properties.listName,
         absoluteURL: this.context.pageContext.web.absoluteUrl,
         spHttpClient: this.properties.listName,
+        context: this.context
       }
     );
 

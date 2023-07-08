@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable eqeqeq */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import * as React from 'react';
-import styles from './ClassifiedAds.module.scss';
 import { IClassifiedAdsProps } from './IClassifiedAdsProps';
+import styles from './ClassifiedAds.module.scss';
 import "bootstrap/dist/css/bootstrap";
 import { IFile, IResponseItem } from "../../../interface";
 import { getSP } from '../../services/pnpjsConfig';
 import { SPFI } from '@pnp/sp';
 import { Logger, LogLevel } from "@pnp/logging";
-import { Button, Card, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 export interface IClassifiedAdsListItem {
   title: string;
@@ -17,35 +21,27 @@ export interface IClassifiedsAdsState {
   items: IFile[];
   errors: string[];
 }
-export default class ClassifiedsAdsCard extends React.Component<IClassifiedAdsProps, IClassifiedsAdsState> {
-  private LOG_SOURCE = "ClassifiedsAds";
-  //private LIBRARY_NAME = "ClassifiedsAds";
-  private _sp: SPFI;
-  //private SPService: getSP = null;
-  constructor(props: IClassifiedAdsProps) {
-    super(props);
-    this._sp = getSP();
-    //this.SPService = new this.SPService(this.props.context);
-    this.getCarouselItems = this.getCarouselItems.bind(this);
-    this.state = {
-      items: [],
-      errors: []
-    };
-  }
+const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
+  let LOG_SOURCE = "ClassifiedsAds";
+  let _sp:SPFI = getSP(props.context)
 
+  const [cardItems, setCardItems] = React.useState<IFile[]>([])
+  const [readMore,setReadMore]=React.useState(false);
+  const linkName=readMore?'Read Less << ':'Read More >> '
+  const columnsPerRow = 3;
 
-  public getCarouselItems = async (): Promise<void> => {
+  const getCardItems =async () => {
     try {
-      //const spCache = spfi(this._sp).using(Caching({ store: "session" }));
-      const response: IResponseItem[] = await this._sp.web.lists
-        .getByTitle(this.props.listName)
-        .items
-        .select("Id", "Title", "Descriptions", "FileLeafRef", "Start_Date", "End_Date" ,"File/Length")
-        .expand("File/Length")();
+       console.log('context', _sp)
+       const response: IResponseItem[] = await _sp.web.lists
+       .getByTitle(props.listName)
+       .items
+       .select("Id", "Title", "Descriptions", "FileLeafRef", "Start_Date", "End_Date" ,"File/Length")
+       .expand("File/Length")();
 
-      // use map to convert 
-      const items: IFile[] = response.map((item: IResponseItem) => {
-        return {
+       //use map to convert
+       setCardItems((await response).map((item: IResponseItem) => {
+        return{
           Id: item.Id,
           Title: item.Title,
           Name: item.FileLeafRef,
@@ -53,51 +49,63 @@ export default class ClassifiedsAdsCard extends React.Component<IClassifiedAdsPr
           Start_Date: item.Start_Date,
           End_Date: item.End_Date
         };
-      });
-      //Add the items to the state
-      this.setState({ items });
-
+       }));
+       
     } catch (err) {
-      Logger.write(`${this.LOG_SOURCE} (getCarouselItems) - ${JSON.stringify(err)} - `, LogLevel.Error);
+      Logger.write(`${LOG_SOURCE} (getCarouselItems) - ${JSON.stringify(err)} - `, LogLevel.Error);
     }
   }
-  public componentDidMount(): void {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    this.getCarouselItems();
-  }
 
-  public getLibrary = async (): Promise<void> => {
+  React.useEffect(() => {
+    if (props.listName && props.listName != "") {
+      getCardItems();
+    }
+  },[props])
+  
+  const getLibrary = async (): Promise<void> => {
     try {
       window.location.href="../../ClassifiedsAds" 
 
     } catch (error) {
-      Logger.write(`${this.LOG_SOURCE} (getLibrary) - ${JSON.stringify(error)} - `, LogLevel.Error);
+      Logger.write(`${LOG_SOURCE} (getLibrary) - ${JSON.stringify(error)} - `, LogLevel.Error);
     }
 
   }
 
-  public render(): React.ReactElement<IClassifiedAdsProps> {
-    // eslint-disable-next-line prefer-const
-    let collection = this.state.items;
-    console.log('Collection ', collection);
-    return (
-      <Row lg={3}>
-      <div className={styles.classifiedAds}>
-        <Card style={{ width: '18rem' }}>
-            {collection.length > 0 && collection.map((data: any) => {
-              return (
-                // eslint-disable-next-line react/jsx-key
-                  <Card.Body>
-                    <Card.Title>{data.Title}</Card.Title>
-                    <Card.Img variant='top' src={'../../ClassifiedsAds/' + data.Name} />
-                    <Card.Text> {data.Descriptions}</Card.Text>
-                    <Button variant='primary' onClick={() => { this.getLibrary() }}>Add Your Ads</Button>
-                  </Card.Body>
-              );
-            })}
-        </Card>
-      </div>
-    </Row>
-    );
+  const renderCard = ()=>{
+    let colldata = cardItems.map((cards, index) => {
+      return (
+        // eslint-disable-next-line react/jsx-key
+        <div className={styles.classifiedAds}>
+          <div>
+          <Button variant='primary' onClick={() => { getLibrary() }}>Add Your Ads</Button>
+          </div>
+        <Col>
+        <Card style={{ width: '13rem' }} key={index} className='box'>
+          <Card.Body>
+            <Card.Img variant='top' src={'../../ClassifiedsAds/' + cards.Name} />
+            <Card.Title>{cards.Title}</Card.Title>
+            <Card.Text> {cards.Descriptions}</Card.Text>
+            <a className="read-more-link" onClick={()=>{setReadMore(!readMore)}}><h2>{linkName}</h2></a>
+               {readMore}
+          </Card.Body>
+          </Card>
+         </Col>
+        </div>
+      );
+
+    });
+
+    return colldata;
   }
-}
+  return (
+    
+    <Container>
+      <Row xs={1} md={columnsPerRow}>
+        {renderCard()}
+      </Row>
+    </Container>
+
+  );
+};
+export default ClassifiedAds;
