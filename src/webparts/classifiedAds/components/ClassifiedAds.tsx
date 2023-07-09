@@ -77,11 +77,8 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
       return (
         // eslint-disable-next-line react/jsx-key
         <div className={styles.classifiedAds}>
-          <div>
-          <Button variant='primary' onClick={() => { getLibrary() }}>Add Your Ads</Button>
-          </div>
         <Col>
-        <Card style={{ width: '13rem' }} key={index} className='box'>
+        <Card style={{ width: '14rem' }} key={index} className='box'>
           <Card.Body>
             <Card.Img variant='top' src={'../../ClassifiedsAds/' + cards.Name} />
             <Card.Title>{cards.Title}</Card.Title>
@@ -101,6 +98,10 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
   return (
     
     <Container>
+        <div className={styles.button}>
+          <Button variant='primary' onClick={() => { getLibrary() }}>Add Your Ads</Button>
+          </div>
+
       <Row xs={1} md={columnsPerRow}>
         {renderCard()}
       </Row>
