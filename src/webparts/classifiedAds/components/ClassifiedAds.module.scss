@@ -17,3 +17,11 @@ padding: 10px 0;
 display: flex;
 justify-content: flex-end;
 }
+
+.read-more-link{
+  color: blueviolet;
+  text-decoration: underline;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-size: 1rem !important;
+}

@@ -26,8 +26,8 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
   let _sp:SPFI = getSP(props.context)
 
   const [cardItems, setCardItems] = React.useState<IFile[]>([])
-  const [readMore,setReadMore]=React.useState(false);
-  const linkName=readMore?'Read Less << ':'Read More >> '
+ // const [readMore,setReadMore]=React.useState(false);
+  //const linkName=readMore?'Read Less << ':'Read More >> '
   const columnsPerRow = 3;
 
   const getCardItems =async () => {
@@ -83,8 +83,6 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
             <Card.Img variant='top' src={'../../ClassifiedsAds/' + cards.Name} />
             <Card.Title>{cards.Title}</Card.Title>
             <Card.Text> {cards.Descriptions}</Card.Text>
-            <a className="read-more-link" onClick={()=>{setReadMore(!readMore)}}><h2>{linkName}</h2></a>
-               {readMore}
           </Card.Body>
           </Card>
          </Col>
@@ -101,7 +99,6 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
         <div className={styles.button}>
           <Button variant='primary' onClick={() => { getLibrary() }}>Add Your Ads</Button>
           </div>
-
       <Row xs={1} md={columnsPerRow}>
         {renderCard()}
       </Row>
