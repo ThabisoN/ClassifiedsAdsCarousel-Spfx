@@ -64,7 +64,7 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
   
   const getLibrary = async (): Promise<void> => {
     try {
-      window.location.href="../ClassifiedsAds" 
+      window.location.href="../../ClassifiedsAds" 
 
     } catch (error) {
       Logger.write(`${LOG_SOURCE} (getLibrary) - ${JSON.stringify(error)} - `, LogLevel.Error);
@@ -80,7 +80,7 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
         <Col>
         <Card style={{ width: '14rem' }} key={index} className='box'>
           <Card.Body>
-            <Card.Img variant='top' src={'../ClassifiedsAds/' + cards.Name} />
+            <Card.Img variant='top' src={'../../ClassifiedsAds/' + cards.Name} />
             <Card.Title>{cards.Title}</Card.Title>
             <Card.Text> {cards.Descriptions}</Card.Text>
           </Card.Body>
