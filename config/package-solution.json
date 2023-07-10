@@ -3,7 +3,7 @@
   "solution": {
     "name": "classified Ads Carousel",
     "id": "06fef0e1-559f-4673-8e97-90db580edf8a",
-    "version": "1.0.0.5",
+    "version": "1.0.0.6",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -30,7 +30,7 @@
         "title": "classified-ads-carousel",
         "description": "Classified Ads Solution.",
         "id": "c1bbf260-d093-4b2d-be42-cd5990bdd9dc",
-        "version": "1.0.0.5"
+        "version": "1.0.0.6"
       }
     ]
   },
