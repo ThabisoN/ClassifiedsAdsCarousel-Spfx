@@ -28,7 +28,7 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
   const [cardItems, setCardItems] = React.useState<IFile[]>([])
  // const [readMore,setReadMore]=React.useState(false);
   //const linkName=readMore?'Read Less << ':'Read More >> '
-  const columnsPerRow = 3;
+  const columnsPerRow = 4;
 
   const getCardItems =async () => {
     try {
