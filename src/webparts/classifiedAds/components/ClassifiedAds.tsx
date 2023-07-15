@@ -79,7 +79,7 @@ const ClassifiedAds: React.FunctionComponent<IClassifiedAdsProps> = (props) => {
         <div className={styles.classifiedAds}>
         <Col>
         <Card style={{ width: '14rem' }} key={index} className={styles.card}>
-          <Card.Body style={{height: '16.5rem'}}>
+          <Card.Body style={{height: '18.5rem'}}>
             <Card.Img className={styles['card-img-top']} variant='top' src={'../../ClassifiedsAds/' + cards.Name} />
             <Card.Title className={styles['card-title']}>{cards.Title}</Card.Title>
             <Card.Text className={styles['card-text']}> {cards.Descriptions}</Card.Text>
